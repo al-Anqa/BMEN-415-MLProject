@@ -7,8 +7,8 @@ input = pd.read_csv('ObesityDataSet_Regression.csv')
 output = input.copy()
 
 
-ones_col = ['family_history_with_overweight', 'Gender']
-ones = ['yes', 'Female']
+ones_col = ['family_history_with_overweight', 'Gender', 'SMOKE', 'SCC']
+ones = ['yes', 'Female', 'yes', 'yes']
 
 i=0
 for col in ones_col:
@@ -20,3 +20,5 @@ for col in ones_col:
 # output['Gender'] = [1 if x == 'Female' else 0 for x in output['Gender']]
 print(output['family_history_with_overweight'])
 print(output['Gender'])
+
+output.to_csv('ProcessedObesityDataSet_Regression.csv')

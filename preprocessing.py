@@ -7,8 +7,10 @@ input = pd.read_csv('ObesityDataSet_Regression.csv')
 output = input.copy()
 
 
-ones_col = ['family_history_with_overweight', 'Gender', 'SMOKE', 'SCC']
-ones = ['yes', 'Female', 'yes', 'yes']
+# Changing the binary data to 0s and 1s
+# Takes list of columns and the values we want to be 1.
+ones_col = ['family_history_with_overweight', 'FAVC','Gender', 'SMOKE', 'SCC']
+ones = ['yes', 'yes', 'Female', 'yes', 'yes']
 
 i=0
 for col in ones_col:
@@ -16,9 +18,39 @@ for col in ones_col:
     i += 1
 
 
-# output['family_history_with_overweight'] = [1 if x == 'yes' else 0 for x in output['family_history_with_overweight']]
-# output['Gender'] = [1 if x == 'Female' else 0 for x in output['Gender']]
-print(output['family_history_with_overweight'])
-print(output['Gender'])
+# print(output['family_history_with_overweight'])
+# print(output['Gender'])
+
+
+# Convert all non-numeric categorical data to integers.
+# Cleaning CAEC
+# CALC and CAEC use the same values and thus same keys
+
+caec_calc_dict = {'no': 0, 'Sometimes':1, 'Frequently': 2, 'Always': 3}
+output['CAEC'] = output['CAEC'].replace(caec_calc_dict)
+output['CALC'] = output['CALC'].replace(caec_calc_dict)
+
+print(output['CAEC'])
+print(output['CALC'])
+
+# print(output['MTRANS'].unique())
+mtrans_dict = {'Walking': 0, 'Bike': 1, 'Public_Transportation': 2, 'Motorbike': 3, 'Automobile': 4}
+output['MTRANS'] = output['MTRANS'].replace(mtrans_dict)
+
+# print(output['NObeyesdad'].unique())
+nobeyesdad_dict = {'Insufficient_Weight': 0, 'Normal_Weight': 1, 'Overweight_Level_I': 2, 'Overweight_Level_II': 3, 'Obesity_Type_I': 4, 'Obesity_Type_II': 5, 'Obesity_Type_III': 6}
+output['NObeyesdad'] = output['NObeyesdad'].replace(nobeyesdad_dict)
+
+# Now, we round the height and weight to 2 decimals and age to 0 decimals
+output['Age'] = output['Age'].round(0)
+output['Height'] = output['Height'].round(2)
+output['Weight'] = output['Weight'].round(0)
+
+# Lastly we round the synthetic data to whole integers where necessary
+output['FCVC'] = output['FCVC'].round(0)
+output['NCP'] = output['NCP'].round(0)
+output['CH2O'] = output['CH2O'].round(0)
+output['FAF'] = output['FAF'].round(0)
+output['TUE'] = output['TUE'].round(0)
 
 output.to_csv('ProcessedObesityDataSet_Regression.csv')

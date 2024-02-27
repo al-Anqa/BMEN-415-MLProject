@@ -1,11 +1,7 @@
 import pandas as pd
 input = pd.read_csv('ObesityDataSet_Regression.csv')
-# print(input)
-# print(input.describe())
 
-# print(input['family_history_with_overweight'])
 output = input.copy()
-
 
 # Changing the binary data to 0s and 1s
 # Takes list of columns and the values we want to be 1.
@@ -17,11 +13,9 @@ for col in ones_col:
     output[col] = [1 if x == ones[i] else 0 for x in output[col]]
     i += 1
 
-
 # print(output['family_history_with_overweight'])
 # print(output['Gender'])
-
-
+    
 # Convert all non-numeric categorical data to integers.
 # Cleaning CAEC
 # CALC and CAEC use the same values and thus same keys
@@ -30,8 +24,8 @@ caec_calc_dict = {'no': 0, 'Sometimes':1, 'Frequently': 2, 'Always': 3}
 output['CAEC'] = output['CAEC'].replace(caec_calc_dict)
 output['CALC'] = output['CALC'].replace(caec_calc_dict)
 
-print(output['CAEC'])
-print(output['CALC'])
+# print(output['CAEC'])
+# print(output['CALC'])
 
 # print(output['MTRANS'].unique())
 mtrans_dict = {'Walking': 0, 'Bike': 1, 'Public_Transportation': 2, 'Motorbike': 3, 'Automobile': 4}

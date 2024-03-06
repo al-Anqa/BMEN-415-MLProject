@@ -1,7 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-input = pd.read_csv('ObesityDataSet_Regression.csv')
+input = pd.read_csv('datasets\ObesityDataSet_Regression.csv')
 
 output = input.copy()
 
@@ -55,4 +55,4 @@ fig, axes = plt.subplots(figsize=(8, 8))
 sns.heatmap(data=output.corr(), annot=True, linewidths=.5, ax=axes) 
 plt.show()
 
-output.to_csv('ProcessedObesityDataSet_Regression.csv', index=False)
+output.to_csv('datasets\ProcessedObesityDataSet_Regression.csv', index=False)

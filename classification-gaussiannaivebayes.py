@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split 
 from sklearn.metrics import r2_score, mean_squared_error
@@ -22,6 +24,16 @@ test_score = gnb_classification.score(x_test, y_test, sample_weight=None)
 
 print(f'The training accuracy for the model is {train_score}')
 print(f'The testing accuracy for the model is {test_score}')
+
+fig1, ax1 = plt.subplots(1,2,figsize=(8, 5))
+
+y_test_1 = np.where(y_test == 1)
+y_test_0 = np.where(y_test == 0)
+
+ax1[0].scatter(x_test['Glucose'].iloc[y_test_1], x_test['BMI'].iloc[y_test_1])
+ax1[0].scatter(x_test['Glucose'].iloc[y_test_0], x_test['BMI'].iloc[y_test_0])
+plt.show()
+# ax1[0].plot(x_test, y_test)
 
 cm = confusion_matrix(y_test, y_test_pred)
 print (cm)

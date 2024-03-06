@@ -2,14 +2,9 @@ import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split 
 from sklearn.metrics import r2_score, mean_squared_error
+from common import regression_data
 
-
-dataset = pd.read_csv('ProcessedObesityDataSet_Regression.csv')
-dataset = dataset.drop(index=0, axis=1)
-print(dataset.head())
-
-x = dataset.drop(['Weight'], axis=1)
-y = dataset.Weight.values
+x, y = regression_data()
 
 print(x)
 print(y)

@@ -55,4 +55,4 @@ fig, axes = plt.subplots(figsize=(8, 8))
 sns.heatmap(data=output.corr(), annot=True, linewidths=.5, ax=axes) 
 plt.show()
 
-output.to_csv('ProcessedObesityDataSet_Regression.csv')
+output.to_csv('ProcessedObesityDataSet_Regression.csv', index=False)

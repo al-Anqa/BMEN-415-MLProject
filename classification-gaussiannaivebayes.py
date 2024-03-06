@@ -1,30 +1,37 @@
 import pandas as pd
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split 
 from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.metrics import confusion_matrix
 from common import classification_data
 
 x, y = classification_data()
 
-print(x)
-print(y)
+print(x, y)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
-regr = RandomForestRegressor(max_depth=10, random_state=0)
-regr.fit(x_train, y_train)
+gnb_classification = GaussianNB()
+gnb_classification.fit(x_train, y_train)
 
-y_train_pred = regr.predict(x_train)
-y_test_pred = regr.predict(x_test)
+y_train_pred = gnb_classification.predict(x_train)
+y_test_pred = gnb_classification.predict(x_test)
 
-r2_train = r2_score(y_train, y_train_pred)
-r2_test = r2_score(y_test, y_test_pred)
+train_score = gnb_classification.score(x_train, y_train, sample_weight=None)
+test_score = gnb_classification.score(x_test, y_test, sample_weight=None)
 
-print(f'The training accuracy for the model is {r2_train}')
-print(f'The testing accuracy for the model is {r2_test}')
+print(f'The training accuracy for the model is {train_score}')
+print(f'The testing accuracy for the model is {test_score}')
 
-rmse_train = (mean_squared_error(y_train, y_train_pred))**(1/2)
-rmse_test = (mean_squared_error(y_test, y_test_pred))**(1/2)
+cm = confusion_matrix(y_test, y_test_pred)
+print (cm)
 
-print(f'The training RMSE for the model is {rmse_train}')
-print(f'The testing RMSE for the model is {rmse_test}')
+tp, tn, fp, fn = cm[1,1], cm[0,0], cm[0,1], cm[1,0]
+
+accuracy = (tp+tn)/(tp+tn+fn+fp)
+sensitivity = tp/(tp+fn)
+specificity = tn/(tn+fp)
+
+print(f'Accuracy = {accuracy}')
+print(f'Sensitivity = {sensitivity}')
+print(f'Specificity = {specificity}')

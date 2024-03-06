@@ -16,7 +16,7 @@ print(y)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
-regr = RandomForestRegressor(max_depth=20, random_state=0)
+regr = RandomForestRegressor(max_depth=10, random_state=0)
 regr.fit(x_train, y_train)
 
 y_train_pred = regr.predict(x_train)

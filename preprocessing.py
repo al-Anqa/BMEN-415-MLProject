@@ -1,8 +1,10 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-input = pd.read_csv('datasets\ObesityDataSet_Regression.csv')
 
+
+# Take in input from the datasets folder
+input = pd.read_csv('datasets\ObesityDataSet_Regression.csv')
 output = input.copy()
 
 # Changing the binary data to 0s and 1s
@@ -49,10 +51,12 @@ output['CH2O'] = output['CH2O'].round(0)
 output['FAF'] = output['FAF'].round(0)
 output['TUE'] = output['TUE'].round(0)
 
+# We look at the described dataset and plot a correlation heatmap to see the relationships between vars.
 print(output.describe())
 
 fig, axes = plt.subplots(figsize=(8, 8)) 
 sns.heatmap(data=output.corr(), annot=True, linewidths=.5, ax=axes) 
 plt.show()
 
+# Output to a csv file.
 output.to_csv('datasets\ProcessedObesityDataSet_Regression.csv', index=False)

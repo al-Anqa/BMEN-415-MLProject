@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 from common import regression_data
 
+# Get regression data from common.py regression function
 x, y = regression_data()
 
 print(x, y)

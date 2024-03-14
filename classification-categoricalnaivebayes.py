@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import CategoricalNB
 from sklearn.model_selection import train_test_split 
 from sklearn.metrics import r2_score, mean_squared_error
 from sklearn.metrics import confusion_matrix
@@ -13,7 +13,7 @@ print(x, y)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
-gnb_classification = GaussianNB()
+gnb_classification = CategoricalNB()
 gnb_classification.fit(x_train, y_train)
 
 y_train_pred = gnb_classification.predict(x_train)

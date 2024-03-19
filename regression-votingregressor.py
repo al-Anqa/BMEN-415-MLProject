@@ -20,9 +20,6 @@ regr1.fit(x_train, y_train)
 regr2 = SVR(kernel='linear')
 regr2.fit(x_train, y_train)
 
-regr3 = PLSRegression(n_components=5)
-regr3.fit(x_train, y_train)
-
 vot_regr = VotingRegressor(estimators=[('rfr', regr1), ('svr', regr2)])
 vot_regr.fit(x_train, y_train)
 

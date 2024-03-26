@@ -1,6 +1,8 @@
 import os
 import numpy as np
 import cv2
+from keras.layers import Activation, Dense
+from keras.models import Sequential 
 from sklearn.model_selection import train_test_split
 
 
@@ -36,3 +38,18 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
 print(f'Train: X={x_train.shape}, y={y_train.shape}')
 print(f'Test: X={x_test.shape}, y={y_test.shape}')
+
+x_train = x_train.reshape(x_train.shape[0], x_train.shape[1] * x_train.shape[2])
+x_test = x_test.reshape(x_test.shape[0], x_test.shape[1] * x_test.shape[2])
+
+print(f'Train: X={x_train.shape}, y={y_train.shape}')
+print(f'Test: X={x_test.shape}, y={y_test.shape}')
+
+model = Sequential()
+model.add(Dense(32, input_dim=50176))
+# model.add(Conv2D())
+model.add(Activation('relu'))
+model.add(Dense(10, input_dim=32))
+model.add(Activation('softmax'))
+
+model.summary()

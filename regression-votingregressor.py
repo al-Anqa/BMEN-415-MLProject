@@ -13,7 +13,7 @@ x, y = regression_data()
 
 print(x, y)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
 
 regr1 = RandomForestRegressor(max_depth=10, random_state=0)
 regr1.fit(x_train, y_train)

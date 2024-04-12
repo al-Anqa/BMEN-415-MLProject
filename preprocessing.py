@@ -39,7 +39,7 @@ output['MTRANS'] = output['MTRANS'].replace(mtrans_dict)
 nobeyesdad_dict = {'Insufficient_Weight': 0, 'Normal_Weight': 1, 'Overweight_Level_I': 2, 'Overweight_Level_II': 3, 'Obesity_Type_I': 4, 'Obesity_Type_II': 5, 'Obesity_Type_III': 6}
 output['NObeyesdad'] = output['NObeyesdad'].replace(nobeyesdad_dict)
 
-# Now, we round the height and weight to 2 decimals and age to 0 decimals
+# Now, we round the height to 2 decimals and age/weight to 0 decimals
 output['Age'] = output['Age'].round(0)
 output['Height'] = output['Height'].round(2)
 output['Weight'] = output['Weight'].round(0)

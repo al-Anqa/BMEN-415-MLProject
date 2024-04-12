@@ -3,8 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.naive_bayes import CategoricalNB
 from sklearn.model_selection import train_test_split 
-from sklearn.metrics import r2_score, mean_squared_error
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, classification_report
 from common import classification_data
 import seaborn as sns
 
@@ -45,3 +44,6 @@ specificity = tn/(tn+fp)
 print(f'Accuracy = {accuracy}')
 print(f'Sensitivity = {sensitivity}')
 print(f'Specificity = {specificity}')
+
+score = classification_report(y_test, y_test_pred)
+print(score)

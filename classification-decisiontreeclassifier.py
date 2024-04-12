@@ -3,8 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, f1_score
 from common import classification_data
+import seaborn as sns
 
 x, y = classification_data()
 
@@ -24,18 +25,15 @@ test_score = dtc_classification.score(x_test, y_test, sample_weight=None)
 print(f'The training accuracy for the model is {train_score}')
 print(f'The testing accuracy for the model is {test_score}')
 
-# fig1, ax1 = plt.subplots(1,2,figsize=(8, 5))
-
-# y_test_1 = np.where(y_test == 1)
-# y_test_0 = np.where(y_test == 0)
-
-# ax1[0].scatter(x_test['Glucose'].iloc[y_test_1], x_test['BMI'].iloc[y_test_1])
-# ax1[0].scatter(x_test['Glucose'].iloc[y_test_0], x_test['BMI'].iloc[y_test_0])
-# plt.show()
-# ax1[0].plot(x_test, y_test)
-
 cm = confusion_matrix(y_test, y_test_pred)
 print (cm)
+
+plt.figure(1)
+sns.heatmap(cm, annot=True, fmt = 'd', cmap='Purples')
+plt.xlabel('Non Event Observed         Event Observed')
+plt.ylabel('Event Predicted          Non Event Predicted')
+plt.title('Decision Tree Classifier Confusion Matrix')
+plt.show()
 
 tp, tn, fp, fn = cm[1,1], cm[0,0], cm[0,1], cm[1,0]
 
